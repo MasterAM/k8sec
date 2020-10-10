@@ -20,6 +20,19 @@ func TestRunLoad(t *testing.T) {
 		wantErr error
 	}{
 		// TODO: Add appropriate error handling test for "no secret"
+		"update empty secret": {
+			args: []string{
+				"rails",
+			},
+			secret: &v1.Secret{
+				ObjectMeta: metav1.ObjectMeta{
+					Name: "rails",
+				},
+				Data: nil,
+			},
+			input:   `database-url="postgres://example.com:5432/dbname"`,
+			wantErr: nil,
+		},
 
 		"update one key-value pair": {
 			args: []string{

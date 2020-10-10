@@ -100,6 +100,10 @@ func runLoad(ctx context.Context, k8sclient client.Client, namespace string, arg
 		return errors.Wrapf(err, "Failed to get secret. name=%s", name)
 	}
 
+	if s.Data == nil {
+		s.Data = make(map[string][]byte)
+	}
+
 	for k, v := range data {
 		s.Data[k] = v
 	}
